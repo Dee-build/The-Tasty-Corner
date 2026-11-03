@@ -93,7 +93,35 @@ export default function Order() {
     }
   };
 
+    // Emails you the order (reference, dishes, total, customer details)
+  const emailOrder = () => {
+    if (!business.orderEmailKey || business.orderEmailKey.startsWith("PASTE")) return;
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      keepalive: true, // keeps sending even if the page changes
+      body: JSON.stringify({
+        access_key: business.orderEmailKey,
+        subject: `New order ${ref} - ${formatNaira(total)}`,
+        from_name: `${business.name} website`,
+        "Order ref": ref,
+        Items: lines
+          .map((l) => `${l.qty} x ${l.product.name} - ${formatNaira(l.product.price * l.qty)}`)
+          .join("\n"),
+        "Delivery fee": deliveryFee ? formatNaira(deliveryFee) : "None",
+        Total: formatNaira(total),
+        Name: form.name,
+        Phone: form.phone,
+        "Pickup or delivery": form.mode === "delivery" ? `Delivery to: ${form.address}` : "Pickup",
+        Notes: form.notes || "None",
+      }),
+    }).catch(() => {
+      /* if the email fails, the WhatsApp message still goes out */
+    });
+  };
+
   const madePayment = () => {
+    emailOrder();
     openWhatsApp();
     goTo("done");
   };

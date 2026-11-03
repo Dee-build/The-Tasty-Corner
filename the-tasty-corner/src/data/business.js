@@ -13,6 +13,8 @@ export const business = {
   },
   deliveryFee: 0, // flat delivery fee in naira, e.g. 1000. Use 0 for free delivery.
 
+    orderEmailKey: "bac2a200-f552-442f-b54b-d9a4020f2575",
+
   hours: [
     ["Monday to Saturday", "11:00 AM – 9:00 PM"],
     ["Sunday", "Closed"],
