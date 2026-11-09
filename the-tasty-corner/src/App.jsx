@@ -9,6 +9,9 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Order from "./pages/Order.jsx";
 import { business } from "./data/business.js";
+import Footer from "./components/Footer.jsx";
+import Privacy from "./pages/Privacy.jsx";
+import Terms from "./pages/Terms.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,21 +36,23 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route
             path="*"
             element={
               <section className="page empty">
                 <h1>Page not found</h1>
                 <p>That page doesn't exist.</p>
-                <Link className="btn" to="/menu">Browse the menu</Link>
+                <Link className="btn" to="/menu">
+                  Browse the menu
+                </Link>
               </section>
             }
           />
         </Routes>
       </main>
-      <footer className="footer">
-        © {new Date().getFullYear()} {business.name} · {business.address}
-      </footer>
+     <Footer />
     </>
   );
 }
