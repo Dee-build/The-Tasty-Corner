@@ -6,7 +6,7 @@ import { Swatch } from "../components/ProductCard.jsx";
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { favorites, toggleFavorite, addToCart } = useStore();
+  const { addToCart } = useStore();
   const product = products.find((p) => p.id === Number(id));
 
   if (!product) {
@@ -18,34 +18,21 @@ export default function ProductDetail() {
     );
   }
 
-  const isFav = favorites.includes(product.id);
+  const order = () => {
+    addToCart(product.id);
+    navigate("/cart");
+  };
 
   return (
     <section className="page detail">
       <Swatch p={product} large />
-      <div>
+      <div className="detail-info">
         <Link to="/menu" className="back">Back to menu</Link>
+        <p className="eyebrow">{product.category}</p>
         <h1>{product.name}</h1>
         <p className="price big">{formatNaira(product.price)}</p>
-        <p className="desc">{product.desc}</p>
-        <div className="row">
-          <button
-            className="btn"
-            onClick={() => {
-              addToCart(product.id);
-              navigate("/cart");
-            }}
-          >
-            Add to order
-          </button>
-          <button
-            className={isFav ? "btn ghost active" : "btn ghost"}
-            onClick={() => toggleFavorite(product.id)}
-            aria-pressed={isFav}
-          >
-            {isFav ? "Saved to favorites" : "Save to favorites"}
-          </button>
-        </div>
+        <p className="desc">{product.details || product.desc}</p>
+        <button className="btn" onClick={order}>Add to order</button>
       </div>
     </section>
   );
