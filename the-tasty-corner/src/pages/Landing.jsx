@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { products, formatNaira } from "../data/products.js";
 import { useStore } from "../context/StoreContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
-import heroLogo from "../photos/logo-full.png";
+import HeroCarousel from "../components/HeroCarousel.jsx";
 
 const perks = [
   { title: "Delicious meals", d: "M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6" },
@@ -68,9 +68,7 @@ export default function Landing() {
             <a href="#specials" className="btn ghost">Chef's specials</a>
           </div>
         </div>
-        <div className="hero-photo">
-          <img src={heroLogo} alt="The Tasty Corner" />
-        </div>
+       <HeroCarousel />
       </section>
 
       <section className="page">
