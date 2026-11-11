@@ -6,6 +6,12 @@ export const business = {
   email: "adedayobabalola18@gmail.com",
   address: "Osogbo, Osun State, Nigeria",
 
+    // Paste your page links between the quotes. Leave "" to hide that icon.
+  socials: {
+    instagram: "https://www.instagram.com/omonla.0?xtok=MTd2eWdxNmZ0Y3BzcA%3D%3D&utm_source=qr",
+    tiktok: "www.tiktok.com/@omonla.0",
+  },
+
   bank: {
     name: "OPAY",
     accountNumber: "9160404544",
